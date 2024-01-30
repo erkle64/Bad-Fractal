@@ -70,7 +70,7 @@ Shader "Hidden/JuliaSet"
                 while (limit-- > 0)
                 {
                     z = float2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
-                    if (length(z) > 2.0) break;
+                    if (length(z) > 4.0) break;
                     float2 t = z * _Trap.xy + _Trap.zw;
                     if (all(saturate(t) == t))
                     {

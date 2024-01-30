@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonEvents : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ButtonEvents : MonoBehaviour
     [SerializeField] private GameObject[] _hideInFullscreenWebPlayer;
     [SerializeField] private SliderInputField[] _sliderInputFields;
     [SerializeField] private TextMeshProUGUI _exportedText;
+    [SerializeField] private Image _exportedTextPanel;
     [SerializeField] private TMP_InputField _settingsField;
 
     private float _exportedTextFadeTime = float.MinValue;
@@ -37,7 +39,9 @@ public class ButtonEvents : MonoBehaviour
 
     void Update()
     {
-        _exportedText.color = new Color(1.0f, 1.0f, 1.0f, Mathf.InverseLerp(1.0f, 0.0f, Time.unscaledTime - _exportedTextFadeTime));
+        var exportedTextFade = Mathf.InverseLerp(1.0f, 0.0f, Time.unscaledTime - _exportedTextFadeTime);
+        _exportedText.color = new Color(1.0f, 1.0f, 1.0f, exportedTextFade);
+        _exportedTextPanel.color = new Color(0.0f, 0.0f, 0.0f, exportedTextFade * 0.5f);
 
 #if UNITY_WEBGL
         var isFullScreen = Screen.fullScreen;
